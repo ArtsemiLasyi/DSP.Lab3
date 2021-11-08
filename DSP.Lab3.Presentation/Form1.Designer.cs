@@ -59,6 +59,8 @@ namespace DSP.Lab3.Presentation
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.ImageSmoothingGroupBox = new System.Windows.Forms.GroupBox();
             this.ImageSmoothingComboBox = new System.Windows.Forms.ComboBox();
+            this.WindowSizeComboBox = new System.Windows.Forms.ComboBox();
+            this.WindowSizeGroupBox = new System.Windows.Forms.GroupBox();
             this.SmoothingGroupBox.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -71,6 +73,7 @@ namespace DSP.Lab3.Presentation
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.ImageSmoothingGroupBox.SuspendLayout();
+            this.WindowSizeGroupBox.SuspendLayout();
             this.SuspendLayout();
             // 
             // SmoothingGroupBox
@@ -249,7 +252,6 @@ namespace DSP.Lab3.Presentation
             this.tabPage3.TabIndex = 4;
             this.tabPage3.Text = "Images";
             this.tabPage3.UseVisualStyleBackColor = true;
-            this.tabPage3.Click += new System.EventHandler(this.tabPage3_Click);
             // 
             // button1
             // 
@@ -308,17 +310,45 @@ namespace DSP.Lab3.Presentation
             this.ImageSmoothingComboBox.TabIndex = 7;
             this.ImageSmoothingComboBox.SelectedIndexChanged += new System.EventHandler(this.comboBox2_SelectedIndexChanged);
             // 
+            // WindowSizeComboBox
+            // 
+            this.WindowSizeComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.WindowSizeComboBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.WindowSizeComboBox.FormattingEnabled = true;
+            this.WindowSizeComboBox.Items.AddRange(new object[] {
+            "3",
+            "5",
+            "7"});
+            this.WindowSizeComboBox.Location = new System.Drawing.Point(9, 25);
+            this.WindowSizeComboBox.Name = "WindowSizeComboBox";
+            this.WindowSizeComboBox.Size = new System.Drawing.Size(272, 28);
+            this.WindowSizeComboBox.TabIndex = 7;
+            this.WindowSizeComboBox.TextChanged += new System.EventHandler(this.WindowSizeComboBox_TextChanged);
+            // 
+            // WindowSizeGroupBox
+            // 
+            this.WindowSizeGroupBox.Controls.Add(this.WindowSizeComboBox);
+            this.WindowSizeGroupBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.WindowSizeGroupBox.Location = new System.Drawing.Point(9, 162);
+            this.WindowSizeGroupBox.Name = "WindowSizeGroupBox";
+            this.WindowSizeGroupBox.Size = new System.Drawing.Size(286, 88);
+            this.WindowSizeGroupBox.TabIndex = 9;
+            this.WindowSizeGroupBox.TabStop = false;
+            this.WindowSizeGroupBox.Text = "Размер окна:";
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
             this.ClientSize = new System.Drawing.Size(1162, 378);
+            this.Controls.Add(this.WindowSizeGroupBox);
             this.Controls.Add(this.ImageSmoothingGroupBox);
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.SmoothingGroupBox);
             this.Name = "MainForm";
             this.Text = "Алгоритмы сглаживания";
+            this.Load += new System.EventHandler(this.MainForm_Load);
             this.SmoothingGroupBox.ResumeLayout(false);
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
@@ -331,6 +361,7 @@ namespace DSP.Lab3.Presentation
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ImageSmoothingGroupBox.ResumeLayout(false);
+            this.WindowSizeGroupBox.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -351,6 +382,8 @@ namespace DSP.Lab3.Presentation
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.GroupBox ImageSmoothingGroupBox;
         private System.Windows.Forms.ComboBox ImageSmoothingComboBox;
+        private System.Windows.Forms.ComboBox WindowSizeComboBox;
+        private System.Windows.Forms.GroupBox WindowSizeGroupBox;
     }
 }
 

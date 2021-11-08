@@ -11,8 +11,14 @@ namespace DSP.Lab3.Api
         double Amplitude;
         double Frequency;
         double Phase;
-        public double[] ps, ms, ss, amplitudeSpectrum, phaseSpectrum;
-        public NoisySignal(double amplitude, double frequency, double phase, int discrPoints)
+        public double[] parabolicSmoothedSignal, medianSmoothedSignal, slidingSmoothedSignal, amplitudeSpectrum, phaseSpectrum;
+
+        public NoisySignal(
+            double amplitude,
+            double frequency,
+            double phase,
+            int discrPoints,
+            int windowSize)
         {
             Amplitude = amplitude;
             n = discrPoints;
@@ -20,9 +26,9 @@ namespace DSP.Lab3.Api
             Phase = phase;
 
             signal = GenerateSignal();
-            ps = ParabolicSmoothing();
-            ms = MedianSmoothing(5);
-            ss = SlidingSmoothing(3);
+            parabolicSmoothedSignal = ParabolicSmoothing();
+            medianSmoothedSignal = MedianSmoothing(windowSize);
+            slidingSmoothedSignal = SlidingSmoothing(windowSize);
             sineSp = GetSineSpectrum(signal);
             cosineSp = GetCosineSpectrum(signal);
             amplSp = GetAmplitudeSpectrum(sineSp, cosineSp);
@@ -33,23 +39,23 @@ namespace DSP.Lab3.Api
 
         public void Operate(FilteringType ft)
         {
-            double[] fs = null;
+            double[] filteredSignal = null;
             switch (ft)
             {
                 case FilteringType.Parabolic:
-                    fs = ps;
+                    filteredSignal = parabolicSmoothedSignal;
                     break;
                 case FilteringType.Median:
-                    fs = ms;
+                    filteredSignal = medianSmoothedSignal;
                     break;
                 case FilteringType.Sliding:
-                    fs = ss;
+                    filteredSignal = slidingSmoothedSignal;
                     break;
                 default:
                     break;
             }
-            double[] sinSpectrum = GetSineSpectrum(fs);
-            double[] cosSpectrum = GetCosineSpectrum(fs);
+            double[] sinSpectrum = GetSineSpectrum(filteredSignal);
+            double[] cosSpectrum = GetCosineSpectrum(filteredSignal);
             amplitudeSpectrum = GetAmplitudeSpectrum(sinSpectrum, cosSpectrum);
             phaseSpectrum = GetPhaseSpectrum(sinSpectrum, cosSpectrum);
         }

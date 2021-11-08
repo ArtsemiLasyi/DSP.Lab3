@@ -28,8 +28,6 @@ namespace DSP.Lab3.Presentation
 
             SmoothingGroupBox.Enabled = true;
             ImageSmoothingGroupBox.Enabled = false;
-
-            Calculate(1, NoisySignal.FilteringType.Parabolic);
         }
 
         private void ClearCharts()
@@ -43,20 +41,26 @@ namespace DSP.Lab3.Presentation
             }
         }
 
-        private void Calculate(int frequency, NoisySignal.FilteringType ft)
+        private void Calculate(int frequency, NoisySignal.FilteringType filteringType)
         {
-            NoisySignal hs = new NoisySignal(10, frequency, 0, 512);
-            double[] fs = null;
-            switch (ft)
+            bool windowSizeFlag = Int32.TryParse(WindowSizeComboBox.Text, out int windowSize);
+            if (!windowSizeFlag)
+            {
+                throw new Exception("Window size is not a number!");
+            }
+
+            NoisySignal signal = new NoisySignal(10, frequency, 0, 512, windowSize);
+            double[] filteredSignal = null;
+            switch (filteringType)
             {
                 case NoisySignal.FilteringType.Parabolic:
-                    fs = hs.ps;
+                    filteredSignal = signal.parabolicSmoothedSignal;
                     break;
                 case NoisySignal.FilteringType.Median:
-                    fs = hs.ms;
+                    filteredSignal = signal.medianSmoothedSignal;
                     break;
                 case NoisySignal.FilteringType.Sliding:
-                    fs = hs.ss;
+                    filteredSignal = signal.slidingSmoothedSignal;
                     break;
                 default:
                     break;
@@ -66,18 +70,18 @@ namespace DSP.Lab3.Presentation
 
             for (int i = 0; i <= 359; i++)
             {
-                targetCharts[0].Series[0].Points.AddXY(2 * Math.PI * i / 360, hs.signVal[i]);
-                targetCharts[0].Series[1].Points.AddXY(2 * Math.PI * i / 360, fs[i]);
+                targetCharts[0].Series[0].Points.AddXY(2 * Math.PI * i / 360, signal.signVal[i]);
+                targetCharts[0].Series[1].Points.AddXY(2 * Math.PI * i / 360, filteredSignal[i]);
             }
 
-            hs.Operate(ft);
+            signal.Operate(filteringType);
 
             for (int i = 0; i <= 49; i++)
             {
-                targetCharts[1].Series[0].Points.AddXY(i, hs.phaseSp[i]);
-                targetCharts[1].Series[1].Points.AddXY(i, hs.phaseSpectrum[i]);
-                targetCharts[2].Series[0].Points.AddXY(i, hs.amplSp[i]);
-                targetCharts[2].Series[1].Points.AddXY(i, hs.amplitudeSpectrum[i]);
+                targetCharts[1].Series[0].Points.AddXY(i, signal.phaseSp[i]);
+                targetCharts[1].Series[1].Points.AddXY(i, signal.phaseSpectrum[i]);
+                targetCharts[2].Series[0].Points.AddXY(i, signal.amplSp[i]);
+                targetCharts[2].Series[1].Points.AddXY(i, signal.amplitudeSpectrum[i]);
             }
         }
 
@@ -98,13 +102,6 @@ namespace DSP.Lab3.Presentation
             }
         }
 
-        private void Transform()
-        {
-            Bitmap finalImage = originImage;
-            pictureBox2.Image = finalImage;
-            pictureBox2.SizeMode = PictureBoxSizeMode.StretchImage;
-        }
-
         private void button1_Click(object sender, EventArgs e)
         {
             OpenFileDialog fileDialog = new OpenFileDialog();
@@ -117,7 +114,7 @@ namespace DSP.Lab3.Presentation
                 pictureBox1.Image = originImage;
                 pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
 
-                ImageSmoothingComboBox.SelectedIndex = 0;
+                ImageSmoothingComboBox.SelectedIndex = 1;
                 SmoothingGroupBox.Enabled = false;
                 ImageSmoothingGroupBox.Enabled = true;
             }
@@ -144,16 +141,38 @@ namespace DSP.Lab3.Presentation
 
         private void comboBox2_SelectedIndexChanged(object sender, EventArgs e)
         {
+            ImageTransformator transformator;
+
             switch (ImageSmoothingComboBox.SelectedIndex)
             {
+                case 0:
+                    transformator = new BoxBlurImageTransformator();
+                    break;
+                case 1:
+                    transformator = new GaussianBlurImageTransformator();
+                    break;
+                case 2:
+                    transformator = new MedianFilterImageTransformator();
+                    break;
+                case 3:
+                    transformator = new SobelFilterImageTransformator();
+                    break;
                 default: return;
             }
-            Transform();
+            Bitmap finalImage = transformator.Transform(originImage);
+            pictureBox2.Image = finalImage;
+            pictureBox2.SizeMode = PictureBoxSizeMode.StretchImage;
         }
 
-        private void tabPage3_Click(object sender, EventArgs e)
+        private void MainForm_Load(object sender, EventArgs e)
         {
+            WindowSizeComboBox.SelectedIndex = 0;
+            Calculate(1, NoisySignal.FilteringType.Parabolic);
+        }
 
+        private void WindowSizeComboBox_TextChanged(object sender, EventArgs e)
+        {
+            Calculate(1, NoisySignal.FilteringType.Parabolic);
         }
     }
 }
