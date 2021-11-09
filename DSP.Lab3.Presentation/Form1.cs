@@ -159,7 +159,7 @@ namespace DSP.Lab3.Presentation
                     break;
                 default: return;
             }
-            Bitmap finalImage = transformator.Transform(originImage);
+            Bitmap finalImage = transformator.Transform(originImage, 5);
             pictureBox2.Image = finalImage;
             pictureBox2.SizeMode = PictureBoxSizeMode.StretchImage;
         }

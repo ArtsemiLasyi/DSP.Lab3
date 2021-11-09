@@ -8,7 +8,7 @@ namespace DSP.Lab3.Api
 {
     public class GaussianBlurImageTransformator : ImageTransformator
     {
-        public unsafe override Bitmap Transform(Bitmap bitmap)
+        public unsafe override Bitmap Transform(Bitmap bitmap, int windowSize)
         {
             Bitmap newBitmap = new Bitmap(bitmap);
             BitmapData bitmapData = newBitmap.LockBits(
@@ -17,32 +17,31 @@ namespace DSP.Lab3.Api
                 newBitmap.PixelFormat
             );
 
-            int s = Image.GetPixelFormatSize(newBitmap.PixelFormat) / 8; // число бит на пиксель
-            int width = newBitmap.Width * s;
+            int pixelSize = Image.GetPixelFormatSize(newBitmap.PixelFormat) / 8; 
+            int width = newBitmap.Width * pixelSize;
             int height = newBitmap.Height;
-            byte[,,] res = new byte[3, height, width];
 
             double acR, acG, acB;
-            int radius = 30;
+            int radius = 300;
             int size = 2 * radius + 6;
 
-            for (int h = 0; h < height; h++)
+            for (int i = 0; i < height; i++)
             {
-                for (int w = 0; w < width; w = w + s)
+                for (int j = 0; j < width; j = j + pixelSize)
                 {
-                    byte* cursorPosition = (byte*)bitmapData.Scan0 + h * bitmapData.Stride;
+                    byte* cursorPosition = (byte*)bitmapData.Scan0 + i * bitmapData.Stride;
 
-                    int R = cursorPosition[w];
-                    int G = cursorPosition[w + 1];
-                    int B = cursorPosition[w + 2];
+                    int R = cursorPosition[j + 1];
+                    int G = cursorPosition[j + 2];
+                    int B = cursorPosition[j + 3];
 
-                    acR = R * (Math.Pow((double)Math.E, -(Math.Pow((double)w - size / 2, 2) + Math.Pow((double)h - size / 2, 2)) / (2 * Math.Pow((double)radius, 2))));
-                    acG = G * (Math.Pow((double)Math.E, -(Math.Pow((double)w - size / 2, 2) + Math.Pow((double)h - size / 2, 2)) / (2 * Math.Pow((double)radius, 2))));
-                    acB = B * (Math.Pow((double)Math.E, -(Math.Pow((double)w - size / 2, 2) + Math.Pow((double)h - size / 2, 2)) / (2 * Math.Pow((double)radius, 2))));
+                    acR = R * (Math.Pow((double)Math.E, -(Math.Pow((double)j - size / 2, 2) + Math.Pow((double)i - size / 2, 2)) / (2 * Math.Pow((double)radius, 2))));
+                    acG = G * (Math.Pow((double)Math.E, -(Math.Pow((double)j - size / 2, 2) + Math.Pow((double)i - size / 2, 2)) / (2 * Math.Pow((double)radius, 2))));
+                    acB = B * (Math.Pow((double)Math.E, -(Math.Pow((double)j - size / 2, 2) + Math.Pow((double)i - size / 2, 2)) / (2 * Math.Pow((double)radius, 2))));
 
-                    cursorPosition[w] = (byte)acR;
-                    cursorPosition[w + 1] = (byte)acG;
-                    cursorPosition[w + 2] = (byte)acB;
+                    cursorPosition[j + 1] = (byte)acR;
+                    cursorPosition[j + 2] = (byte)acG;
+                    cursorPosition[j + 3] = (byte)acB;
                 }
             }
             newBitmap.UnlockBits(bitmapData);
