@@ -10,72 +10,76 @@ namespace DSP.Lab3.Api
     {
         public unsafe override Bitmap Transform(Bitmap bitmap, int windowSize)
         {
-            BitmapData sourceData = bitmap.LockBits(
-                new Rectangle(0, 0, bitmap.Width, bitmap.Height),
-                ImageLockMode.ReadOnly,
-                PixelFormat.Format32bppArgb
+            Bitmap newBitmap = new Bitmap(bitmap);
+
+            BitmapData bitmapData = newBitmap.LockBits(
+                new Rectangle(0, 0, newBitmap.Width, newBitmap.Height),
+                ImageLockMode.ReadWrite,
+                newBitmap.PixelFormat
             );
 
-            byte[] pixelBuffer = new byte[sourceData.Stride * sourceData.Height];
-            byte[] resultBuffer = new byte[sourceData.Stride * sourceData.Height];
+            int pixelSize = Image.GetPixelFormatSize(newBitmap.PixelFormat) / 8;
 
-            Marshal.Copy(sourceData.Scan0, pixelBuffer, 0, pixelBuffer.Length);
+            int bytes = bitmapData.Stride * bitmapData.Height;
+            IntPtr scan = bitmapData.Scan0;
+            byte[] data = new byte[bytes];
+            Marshal.Copy(scan, data, 0, bytes);
 
-            bitmap.UnlockBits(sourceData);
-
-            int filterOffset = (windowSize - 1) / 2;
-
-            int calcOffset = 0;
-            int byteOffset = 0;
-
-            List<int> neighbourPixels = new List<int>();
-            byte[] middlePixel;
-
-
-            for (int offsetY = filterOffset; offsetY < bitmap.Height - filterOffset; offsetY++)
+            for (int i = 0; i < newBitmap.Height; i++)
             {
-                for (int offsetX = filterOffset; offsetX <
-                    bitmap.Width - filterOffset; offsetX++)
+                for (int j = 0; j < newBitmap.Width * pixelSize; j += pixelSize)
                 {
-                    byteOffset = offsetY * sourceData.Stride + offsetX * 4;
+                    byte* cursorPosition = (byte*)bitmapData.Scan0 + i * bitmapData.Stride;
 
-                    neighbourPixels.Clear();
+                    int delta = windowSize / 2;
 
+                    int counter = 0;
 
-                    for (int filterY = -filterOffset; filterY <= filterOffset; filterY++)
+                    List<int> redValues = new List<int>();
+                    List<int> blueValues = new List<int>();
+                    List<int> greenValues = new List<int>();
+                    List<int> alphaValues = new List<int>();
+
+                    for (int k = 0; k < windowSize; k++)
                     {
-                        for (int filterX = -filterOffset; filterX <= filterOffset; filterX++)
+                        int indexY = k + i - delta;
+                        if (indexY < 0 || indexY > newBitmap.Height - 1)
                         {
-                            calcOffset = byteOffset + (filterX * 4) + (filterY * sourceData.Stride);
+                            continue;
+                        }
 
-                            neighbourPixels.Add(BitConverter.ToInt32(pixelBuffer, calcOffset));
+                        int index = indexY * bitmapData.Stride;
+                        for (int s = 0; s < windowSize * pixelSize; s += pixelSize)
+                        {
+                            int indexX = s + j - delta * pixelSize;
+                            if (indexX < 0 || indexX > (newBitmap.Width - 1) * pixelSize)
+                            {
+                                continue;
+                            }
+
+                            alphaValues.Add((int)(data[index + indexX + 3]));
+                            redValues.Add((int)(data[index + indexX + 2]));
+                            greenValues.Add((int)(data[index + indexX + 1]));
+                            blueValues.Add((int)(data[index + indexX]));
+
+                            counter++;
                         }
                     }
 
+                    alphaValues.Sort();
+                    redValues.Sort();
+                    greenValues.Sort();
+                    blueValues.Sort();
 
-                    neighbourPixels.Sort();
-
-                    middlePixel = BitConverter.GetBytes(neighbourPixels[filterOffset]);
-
-                    resultBuffer[byteOffset] = middlePixel[0];
-                    resultBuffer[byteOffset + 1] = middlePixel[1];
-                    resultBuffer[byteOffset + 2] = middlePixel[2];
-                    resultBuffer[byteOffset + 3] = middlePixel[3];
+                    cursorPosition[j + 3] = (byte)(alphaValues[counter / 2 - 1]);
+                    cursorPosition[j + 2] = (byte)(redValues[counter / 2 - 1]);
+                    cursorPosition[j + 1] = (byte)(greenValues[counter / 2 - 1]);
+                    cursorPosition[j] = (byte)(blueValues[counter / 2 - 1]);
                 }
             }
+            newBitmap.UnlockBits(bitmapData);
 
-
-            Bitmap resultBitmap = new Bitmap(bitmap.Width, bitmap.Height);
-
-            BitmapData resultData = resultBitmap.LockBits(
-                new Rectangle(0, 0,
-                       resultBitmap.Width, resultBitmap.Height),
-                       ImageLockMode.WriteOnly,
-                       PixelFormat.Format32bppArgb);
-            Marshal.Copy(resultBuffer, 0, resultData.Scan0, resultBuffer.Length);
-            resultBitmap.UnlockBits(resultData);
-
-            return resultBitmap;
+            return newBitmap;
         }
     }
 }

@@ -68,7 +68,7 @@ namespace DSP.Lab3.Presentation
 
             ClearCharts();
 
-            for (int i = 0; i <= 359; i++)
+            for (int i = 0; i < 360; i++)
             {
                 targetCharts[0].Series[0].Points.AddXY(2 * Math.PI * i / 360, signal.signVal[i]);
                 targetCharts[0].Series[1].Points.AddXY(2 * Math.PI * i / 360, filteredSignal[i]);
@@ -76,7 +76,7 @@ namespace DSP.Lab3.Presentation
 
             signal.Operate(filteringType);
 
-            for (int i = 0; i <= 49; i++)
+            for (int i = 0; i < 50; i++)
             {
                 targetCharts[1].Series[0].Points.AddXY(i, signal.phaseSp[i]);
                 targetCharts[1].Series[1].Points.AddXY(i, signal.phaseSpectrum[i]);
@@ -141,6 +141,23 @@ namespace DSP.Lab3.Presentation
 
         private void comboBox2_SelectedIndexChanged(object sender, EventArgs e)
         {
+            TransformImage();
+        }
+
+        private void MainForm_Load(object sender, EventArgs e)
+        {
+            WindowSizeComboBox.SelectedIndex = 0;
+            Calculate(1, NoisySignal.FilteringType.Parabolic);
+        }
+
+        private void WindowSizeComboBox_TextChanged(object sender, EventArgs e)
+        {
+            Calculate(1, NoisySignal.FilteringType.Parabolic);
+            TransformImage();
+        }
+
+        public void TransformImage()
+        {
             ImageTransformator transformator;
 
             switch (ImageSmoothingComboBox.SelectedIndex)
@@ -159,20 +176,11 @@ namespace DSP.Lab3.Presentation
                     break;
                 default: return;
             }
-            Bitmap finalImage = transformator.Transform(originImage, 5);
+
+            int windowSize = Int32.Parse(WindowSizeComboBox.Text);
+            Bitmap finalImage = transformator.Transform(originImage, windowSize);
             pictureBox2.Image = finalImage;
             pictureBox2.SizeMode = PictureBoxSizeMode.StretchImage;
-        }
-
-        private void MainForm_Load(object sender, EventArgs e)
-        {
-            WindowSizeComboBox.SelectedIndex = 0;
-            Calculate(1, NoisySignal.FilteringType.Parabolic);
-        }
-
-        private void WindowSizeComboBox_TextChanged(object sender, EventArgs e)
-        {
-            Calculate(1, NoisySignal.FilteringType.Parabolic);
         }
     }
 }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Imaging;
+using System.Runtime.InteropServices;
 using System.Text;
 
 namespace DSP.Lab3.Api
@@ -19,6 +20,10 @@ namespace DSP.Lab3.Api
             );
 
             int pixelSize = Image.GetPixelFormatSize(newBitmap.PixelFormat) / 8;
+            int bytes = bitmapData.Stride * bitmapData.Height;
+            IntPtr scan = bitmapData.Scan0;
+            byte[] data = new byte[bytes];
+            Marshal.Copy(scan, data, 0, bytes);
 
             for (int i = 0; i < newBitmap.Height; i++ )
             {
@@ -42,7 +47,7 @@ namespace DSP.Lab3.Api
                             continue;
                         }
 
-                        byte* otherCursorPosition = (byte*)bitmapData.Scan0 + indexY * bitmapData.Stride;
+                        int index = indexY * bitmapData.Stride;
                         for (int s = 0; s < windowSize * pixelSize; s += pixelSize)
                         {
                             int indexX = s + j - delta * pixelSize;
@@ -51,17 +56,17 @@ namespace DSP.Lab3.Api
                                 continue;
                             }
 
-                            red += otherCursorPosition[indexX + 1];
-                            green += otherCursorPosition[indexX + 2];
-                            blue += otherCursorPosition[indexX + 3];
+                            red += data[index + indexX + 2];
+                            green += data[index + indexX + 1];
+                            blue += data[index + indexX];
 
                             counter++;
                         }
                     }
 
-                    cursorPosition[j + 1] = (byte)(red / counter);
-                    cursorPosition[j + 2] = (byte)(green / counter);
-                    cursorPosition[j + 3] = (byte)(blue / counter);
+                    cursorPosition[j + 2] = (byte)(red / counter);
+                    cursorPosition[j + 1] = (byte)(green / counter);
+                    cursorPosition[j] = (byte)(blue / counter);
                 }
             }
             newBitmap.UnlockBits(bitmapData);

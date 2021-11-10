@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Imaging;
+using System.Runtime.InteropServices;
 using System.Text;
 
 namespace DSP.Lab3.Api
@@ -26,12 +27,32 @@ namespace DSP.Lab3.Api
                 {
                     byte* cursorPosition = (byte*)bitmapData.Scan0 + i * bitmapData.Stride;
 
-                    int redX = 0;
-                    int greenX = 0;
-                    int blueX = 0;
-                    int redY = 0;
-                    int greenY = 0;
-                    int blueY = 0;
+                    double rgb = (cursorPosition[j + 2] * 0.071) + (cursorPosition[j] * 0.21) + (cursorPosition[j + 1] * 0.71);
+
+                    cursorPosition[j] = (byte)rgb;
+                    cursorPosition[j + 1] = (byte)rgb;
+                    cursorPosition[j + 2] = (byte)rgb;
+                    cursorPosition[j + 3] = (byte)255;
+                }
+            }
+
+            int bytes = bitmapData.Stride * bitmapData.Height;
+            IntPtr scan = bitmapData.Scan0;
+            byte[] data = new byte[bytes];
+            Marshal.Copy(scan, data, 0, bytes);
+
+            for (int i = 0; i < newBitmap.Height; i++)
+            {
+                for (int j = 0; j < newBitmap.Width * pixelSize; j += pixelSize)
+                {
+                    byte* cursorPosition = (byte*)bitmapData.Scan0 + i * bitmapData.Stride;
+
+                    double redX = 0;
+                    double greenX = 0;
+                    double blueX = 0;
+                    double redY = 0;
+                    double greenY = 0;
+                    double blueY = 0;
 
                     int delta = windowSize / 2;
 
@@ -48,7 +69,7 @@ namespace DSP.Lab3.Api
                             continue;
                         }
 
-                        byte* otherCursorPosition = (byte*)bitmapData.Scan0 + indexY * bitmapData.Stride;
+                        int index = indexY * bitmapData.Stride;
                         for (int s = 0; s < windowSize * pixelSize; s += pixelSize)
                         {
                             int indexX = s + j - delta * pixelSize;
@@ -57,34 +78,47 @@ namespace DSP.Lab3.Api
                                 continue;
                             }
 
-                            redX += otherCursorPosition[indexX + 1] * kernelX[k, s / pixelSize];
-                            greenX += otherCursorPosition[indexX + 2] * kernelX[k, s / pixelSize];
-                            blueX += otherCursorPosition[indexX + 3] * kernelX[k, s / pixelSize];
-                            redY += otherCursorPosition[indexX + 1] * kernelY[k, s / pixelSize];
-                            greenY += otherCursorPosition[indexX + 2] * kernelY[k, s / pixelSize];
-                            redY += otherCursorPosition[indexX + 3] * kernelY[k, s / pixelSize];
+                            redX += data[index + indexX + 2] * kernelX[k, s / pixelSize];
+                            greenX += data[index + indexX + 1] * kernelX[k, s / pixelSize];
+                            blueX += data[index + indexX] * kernelX[k, s / pixelSize];
+                            redY += data[index + indexX + 2] * kernelY[k, s / pixelSize];
+                            greenY += data[index + indexX + 1] * kernelY[k, s / pixelSize];
+                            blueY += data[index + indexX] * kernelY[k, s / pixelSize];
 
                             counter++;
                         }
                     }
 
-                    int red = (byte)Math.Sqrt(
+                    double red = Math.Sqrt(
                         Math.Pow(redX, 2)
                         + Math.Pow(redY, 2)
                     );
-                    int green = (byte)Math.Sqrt(
+                    double green = Math.Sqrt(
                         Math.Pow(greenX, 2)
                         + Math.Pow(greenY, 2)
                     );
-                    int blue = (byte)Math.Sqrt(
+                    double blue = Math.Sqrt(
                         Math.Pow(blueX, 2)
                         + Math.Pow(blueY, 2)
                     );
 
-                    cursorPosition[j] = 255;
-                    cursorPosition[j + 1] = (byte)(red / Math.Pow(windowSize, 2));
-                    cursorPosition[j + 2] = (byte)(green / Math.Pow(windowSize, 2));
-                    cursorPosition[j + 3] = (byte)(blue / Math.Pow(windowSize, 2));
+                    if (red > 255)
+                    {
+                        red = 255;
+                    }
+                    if (green > 255)
+                    {
+                        green = 255;
+                    }
+                    if (blue > 255)
+                    {
+                        blue = 255;
+                    }
+
+                    cursorPosition[j] = (byte)blue;
+                    cursorPosition[j + 1] = (byte)green;
+                    cursorPosition[j + 2] = (byte)red;
+                    cursorPosition[j + 3] = 255;
                 }
             }
             newBitmap.UnlockBits(bitmapData);

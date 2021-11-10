@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 
 namespace DSP.Lab3.Api
@@ -20,6 +21,11 @@ namespace DSP.Lab3.Api
             );
 
             int pixelSize = Image.GetPixelFormatSize(newBitmap.PixelFormat) / 8;
+
+            int bytes = bitmapData.Stride * bitmapData.Height;
+            IntPtr scan = bitmapData.Scan0;
+            byte[] data = new byte[bytes];
+            Marshal.Copy(scan, data, 0, bytes);
 
             for (int i = 0; i < newBitmap.Height; i++)
             {
@@ -45,7 +51,7 @@ namespace DSP.Lab3.Api
                             continue;
                         }
 
-                        byte* otherCursorPosition = (byte*)bitmapData.Scan0 + indexY * bitmapData.Stride;
+                        int index = indexY * bitmapData.Stride;
                         for (int s = 0; s < windowSize * pixelSize; s += pixelSize)
                         {
                             int indexX = s + j - delta * pixelSize;
@@ -54,17 +60,17 @@ namespace DSP.Lab3.Api
                                 continue;
                             }
 
-                            red += (int)(otherCursorPosition[indexX + 1] * coefs[counter]);
-                            green += (int)(otherCursorPosition[indexX + 2] * coefs[counter]);
-                            blue += (int)(otherCursorPosition[indexX + 3] * coefs[counter]);
+                            red += (int)(data[index + indexX + 2] * coefs[counter]);
+                            green += (int)(data[index + indexX + 1] * coefs[counter]);
+                            blue += (int)(data[index + indexX] * coefs[counter]);
 
                             counter++;
                         }
                     }
 
-                    cursorPosition[j + 1] = (byte)(red);
-                    cursorPosition[j + 2] = (byte)(green);
-                    cursorPosition[j + 3] = (byte)(blue);
+                    cursorPosition[j + 2] = (byte)(red);
+                    cursorPosition[j + 1] = (byte)(green);
+                    cursorPosition[j] = (byte)(blue);
                 }
             }
             newBitmap.UnlockBits(bitmapData);
@@ -74,7 +80,7 @@ namespace DSP.Lab3.Api
 
         private double[] GetCoefficients(int windowSize)
         {
-            double sigma = 3.5;
+            double sigma = 0.5;
 
             double[] coefs = new double[windowSize * windowSize];
 
