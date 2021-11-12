@@ -95,7 +95,7 @@ namespace DSP.Lab3.Api
             for (int j = 0; j < numHarm; j++)
             {
                 double val = 0;
-                for (int i = 0; i <= n - 1; i++)
+                for (int i = 0; i < n; i++)
                 {
                     val += signal[i] * Math.Cos(2 * Math.PI * i * j / n);
                 }
@@ -120,7 +120,7 @@ namespace DSP.Lab3.Api
             for (int j = 0; j < numHarm; j++)
             {
                 values[j] = Math.Atan2(sineSp[j], cosineSp[j]);
-                if (amplSp[j] < 0.001)
+                if (amplSp[j] < 0.1)
                 {
                     values[j] = 0;
                 }
@@ -210,7 +210,7 @@ namespace DSP.Lab3.Api
             for (int i = 0; i < result.Length - windowSize; i++)
             {
                 window.Clear();
-                for (int j = i; j <= i + windowSize - 1; j++)
+                for (int j = i; j < i + windowSize; j++)
                 {
                     window.Add(signal[j]);
                 }

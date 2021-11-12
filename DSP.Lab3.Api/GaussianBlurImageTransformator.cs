@@ -27,21 +27,21 @@ namespace DSP.Lab3.Api
             byte[] data = new byte[bytes];
             Marshal.Copy(scan, data, 0, bytes);
 
+            double[] coefs = GetCoefficients(windowSize);
+
             for (int i = 0; i < newBitmap.Height; i++)
             {
                 for (int j = 0; j < newBitmap.Width * pixelSize; j += pixelSize)
                 {
                     byte* cursorPosition = (byte*)bitmapData.Scan0 + i * bitmapData.Stride;
 
-                    int red = 0;
-                    int green = 0;
-                    int blue = 0;
+                    double red = 0;
+                    double green = 0;
+                    double blue = 0;
 
                     int delta = windowSize / 2;
 
                     int counter = 0;
-
-                    double[] coefs = GetCoefficients(windowSize);
 
                     for (int k = 0; k < windowSize; k++)
                     {
@@ -60,9 +60,9 @@ namespace DSP.Lab3.Api
                                 continue;
                             }
 
-                            red += (int)(data[index + indexX + 2] * coefs[counter]);
-                            green += (int)(data[index + indexX + 1] * coefs[counter]);
-                            blue += (int)(data[index + indexX] * coefs[counter]);
+                            red += (data[index + indexX + 2] * coefs[counter]);
+                            green += (data[index + indexX + 1] * coefs[counter]);
+                            blue += (data[index + indexX] * coefs[counter]);
 
                             counter++;
                         }
@@ -80,14 +80,14 @@ namespace DSP.Lab3.Api
 
         private double[] GetCoefficients(int windowSize)
         {
-            double sigma = 0.5;
+            double sigma = ((double)windowSize / 6);
 
             double[] coefs = new double[windowSize * windowSize];
 
             for (int i = 0; i < windowSize * windowSize; i++)
             {
-                int row = i / windowSize;
-                int place = i % windowSize;
+                int row = i / windowSize + 1;
+                int place = i % windowSize + 1;
 
                 double xSquare = Math.Pow(row - (windowSize / 2 + 1), 2);
                 double ySquare = Math.Pow(place - (windowSize / 2 + 1), 2);
@@ -101,9 +101,21 @@ namespace DSP.Lab3.Api
 
             double sum = coefs.Sum();
 
+
             for (int i = 0; i < windowSize * windowSize; i++)
             {
-                coefs[i] /= sum;
+                coefs[i] /= sum ;
+            }
+
+            double anotherSum = coefs.Sum();
+            double max = coefs.Max();
+            int index;
+            for (int i = 0; i < coefs.Length; i++)
+            {
+                if (coefs[i] == max)
+                {
+                    index = i;
+                }
             }
 
 

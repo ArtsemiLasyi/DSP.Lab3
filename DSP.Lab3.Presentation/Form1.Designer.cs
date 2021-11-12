@@ -29,21 +29,21 @@ namespace DSP.Lab3.Presentation
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea4 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend4 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series7 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Series series8 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Title title4 = new System.Windows.Forms.DataVisualization.Charting.Title();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea5 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend5 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series9 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Series series10 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Title title5 = new System.Windows.Forms.DataVisualization.Charting.Title();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea6 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend6 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series11 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Series series12 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Title title6 = new System.Windows.Forms.DataVisualization.Charting.Title();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Title title1 = new System.Windows.Forms.DataVisualization.Charting.Title();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series3 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Series series4 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Title title2 = new System.Windows.Forms.DataVisualization.Charting.Title();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea3 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend3 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series5 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Series series6 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Title title3 = new System.Windows.Forms.DataVisualization.Charting.Title();
             this.SmoothingGroupBox = new System.Windows.Forms.GroupBox();
             this.SmoothingComboBox = new System.Windows.Forms.ComboBox();
             this.tabControl1 = new System.Windows.Forms.TabControl();
@@ -81,9 +81,11 @@ namespace DSP.Lab3.Presentation
             this.SmoothingGroupBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.SmoothingGroupBox.Controls.Add(this.SmoothingComboBox);
             this.SmoothingGroupBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.SmoothingGroupBox.Location = new System.Drawing.Point(13, 18);
+            this.SmoothingGroupBox.Location = new System.Drawing.Point(17, 22);
+            this.SmoothingGroupBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.SmoothingGroupBox.Name = "SmoothingGroupBox";
-            this.SmoothingGroupBox.Size = new System.Drawing.Size(282, 61);
+            this.SmoothingGroupBox.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.SmoothingGroupBox.Size = new System.Drawing.Size(376, 75);
             this.SmoothingGroupBox.TabIndex = 4;
             this.SmoothingGroupBox.TabStop = false;
             this.SmoothingGroupBox.Text = "Вид сглаживания";
@@ -95,10 +97,10 @@ namespace DSP.Lab3.Presentation
             "Параболическое",
             "Скользящим усреднением",
             "Медианной фильтрацией"});
-            this.SmoothingComboBox.Location = new System.Drawing.Point(5, 24);
-            this.SmoothingComboBox.Margin = new System.Windows.Forms.Padding(2);
+            this.SmoothingComboBox.Location = new System.Drawing.Point(7, 30);
+            this.SmoothingComboBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.SmoothingComboBox.Name = "SmoothingComboBox";
-            this.SmoothingComboBox.Size = new System.Drawing.Size(267, 28);
+            this.SmoothingComboBox.Size = new System.Drawing.Size(355, 33);
             this.SmoothingComboBox.TabIndex = 6;
             this.SmoothingComboBox.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
             // 
@@ -109,156 +111,156 @@ namespace DSP.Lab3.Presentation
             this.tabControl1.Controls.Add(this.tabPage4);
             this.tabControl1.Controls.Add(this.tabPage3);
             this.tabControl1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.tabControl1.Location = new System.Drawing.Point(300, 18);
-            this.tabControl1.Margin = new System.Windows.Forms.Padding(2);
+            this.tabControl1.Location = new System.Drawing.Point(400, 22);
+            this.tabControl1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(856, 350);
+            this.tabControl1.Size = new System.Drawing.Size(1141, 431);
             this.tabControl1.TabIndex = 5;
             this.tabControl1.SelectedIndexChanged += new System.EventHandler(this.tabControl1_SelectedIndexChanged);
             // 
             // tabPage1
             // 
             this.tabPage1.Controls.Add(this.chart1);
-            this.tabPage1.Location = new System.Drawing.Point(4, 29);
-            this.tabPage1.Margin = new System.Windows.Forms.Padding(2);
+            this.tabPage1.Location = new System.Drawing.Point(4, 34);
+            this.tabPage1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(2);
-            this.tabPage1.Size = new System.Drawing.Size(848, 317);
+            this.tabPage1.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.tabPage1.Size = new System.Drawing.Size(1133, 393);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Сигналы";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
             // chart1
             // 
-            chartArea4.Name = "ChartArea1";
-            this.chart1.ChartAreas.Add(chartArea4);
-            legend4.Name = "Legend1";
-            this.chart1.Legends.Add(legend4);
-            this.chart1.Location = new System.Drawing.Point(17, 14);
-            this.chart1.Margin = new System.Windows.Forms.Padding(2);
+            chartArea1.Name = "ChartArea1";
+            this.chart1.ChartAreas.Add(chartArea1);
+            legend1.Name = "Legend1";
+            this.chart1.Legends.Add(legend1);
+            this.chart1.Location = new System.Drawing.Point(23, 17);
+            this.chart1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.chart1.Name = "chart1";
-            series7.ChartArea = "ChartArea1";
-            series7.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
-            series7.Color = System.Drawing.Color.Red;
-            series7.Legend = "Legend1";
-            series7.Name = "Исходный сигнал";
-            series8.ChartArea = "ChartArea1";
-            series8.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
-            series8.Color = System.Drawing.Color.Blue;
-            series8.Legend = "Legend1";
-            series8.Name = "Сглаженный сигнал";
-            this.chart1.Series.Add(series7);
-            this.chart1.Series.Add(series8);
-            this.chart1.Size = new System.Drawing.Size(774, 296);
+            series1.ChartArea = "ChartArea1";
+            series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
+            series1.Color = System.Drawing.Color.Red;
+            series1.Legend = "Legend1";
+            series1.Name = "Исходный сигнал";
+            series2.ChartArea = "ChartArea1";
+            series2.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
+            series2.Color = System.Drawing.Color.Blue;
+            series2.Legend = "Legend1";
+            series2.Name = "Сглаженный сигнал";
+            this.chart1.Series.Add(series1);
+            this.chart1.Series.Add(series2);
+            this.chart1.Size = new System.Drawing.Size(1032, 364);
             this.chart1.TabIndex = 0;
             this.chart1.Text = "chart1";
-            title4.Name = "Title1";
-            title4.Text = "Сигналы";
-            this.chart1.Titles.Add(title4);
+            title1.Name = "Title1";
+            title1.Text = "Сигналы";
+            this.chart1.Titles.Add(title1);
             // 
             // tabPage2
             // 
             this.tabPage2.Controls.Add(this.chart2);
-            this.tabPage2.Location = new System.Drawing.Point(4, 29);
-            this.tabPage2.Margin = new System.Windows.Forms.Padding(2);
+            this.tabPage2.Location = new System.Drawing.Point(4, 34);
+            this.tabPage2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(2);
-            this.tabPage2.Size = new System.Drawing.Size(848, 317);
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.tabPage2.Size = new System.Drawing.Size(1133, 393);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Фазовый спектр";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
             // chart2
             // 
-            chartArea5.Name = "ChartArea1";
-            this.chart2.ChartAreas.Add(chartArea5);
-            legend5.Name = "Legend1";
-            this.chart2.Legends.Add(legend5);
-            this.chart2.Location = new System.Drawing.Point(5, 12);
-            this.chart2.Margin = new System.Windows.Forms.Padding(2);
+            chartArea2.Name = "ChartArea1";
+            this.chart2.ChartAreas.Add(chartArea2);
+            legend2.Name = "Legend1";
+            this.chart2.Legends.Add(legend2);
+            this.chart2.Location = new System.Drawing.Point(7, 15);
+            this.chart2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.chart2.Name = "chart2";
-            series9.ChartArea = "ChartArea1";
-            series9.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Candlestick;
-            series9.Color = System.Drawing.Color.Red;
-            series9.Legend = "Legend1";
-            series9.Name = "Исходный сигнал";
-            series9.YValuesPerPoint = 4;
-            series10.ChartArea = "ChartArea1";
-            series10.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Candlestick;
-            series10.Color = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
-            series10.Legend = "Legend1";
-            series10.Name = "Сглаженный сигнал";
-            series10.YValuesPerPoint = 4;
-            this.chart2.Series.Add(series9);
-            this.chart2.Series.Add(series10);
-            this.chart2.Size = new System.Drawing.Size(777, 299);
+            series3.ChartArea = "ChartArea1";
+            series3.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Candlestick;
+            series3.Color = System.Drawing.Color.Red;
+            series3.Legend = "Legend1";
+            series3.Name = "Исходный сигнал";
+            series3.YValuesPerPoint = 4;
+            series4.ChartArea = "ChartArea1";
+            series4.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Candlestick;
+            series4.Color = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
+            series4.Legend = "Legend1";
+            series4.Name = "Сглаженный сигнал";
+            series4.YValuesPerPoint = 4;
+            this.chart2.Series.Add(series3);
+            this.chart2.Series.Add(series4);
+            this.chart2.Size = new System.Drawing.Size(1036, 368);
             this.chart2.TabIndex = 0;
             this.chart2.Text = "chart2";
-            title5.Name = "Title1";
-            title5.Text = "Фазовый спектр";
-            this.chart2.Titles.Add(title5);
+            title2.Name = "Title1";
+            title2.Text = "Фазовый спектр";
+            this.chart2.Titles.Add(title2);
             // 
             // tabPage4
             // 
             this.tabPage4.Controls.Add(this.chart3);
-            this.tabPage4.Location = new System.Drawing.Point(4, 29);
-            this.tabPage4.Margin = new System.Windows.Forms.Padding(2);
+            this.tabPage4.Location = new System.Drawing.Point(4, 34);
+            this.tabPage4.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.tabPage4.Name = "tabPage4";
-            this.tabPage4.Size = new System.Drawing.Size(848, 317);
+            this.tabPage4.Size = new System.Drawing.Size(1133, 393);
             this.tabPage4.TabIndex = 3;
             this.tabPage4.Text = "Амплитудный спектр";
             this.tabPage4.UseVisualStyleBackColor = true;
             // 
             // chart3
             // 
-            chartArea6.Name = "ChartArea1";
-            this.chart3.ChartAreas.Add(chartArea6);
-            legend6.Name = "Legend1";
-            this.chart3.Legends.Add(legend6);
-            this.chart3.Location = new System.Drawing.Point(23, 21);
-            this.chart3.Margin = new System.Windows.Forms.Padding(2);
+            chartArea3.Name = "ChartArea1";
+            this.chart3.ChartAreas.Add(chartArea3);
+            legend3.Name = "Legend1";
+            this.chart3.Legends.Add(legend3);
+            this.chart3.Location = new System.Drawing.Point(31, 26);
+            this.chart3.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.chart3.Name = "chart3";
-            series11.ChartArea = "ChartArea1";
-            series11.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Candlestick;
-            series11.Color = System.Drawing.Color.Red;
-            series11.Legend = "Legend1";
-            series11.Name = "Исходный сигнал";
-            series11.YValuesPerPoint = 4;
-            series12.ChartArea = "ChartArea1";
-            series12.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Candlestick;
-            series12.Color = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
-            series12.Legend = "Legend1";
-            series12.Name = "Сглаженный сигнал";
-            series12.YValuesPerPoint = 4;
-            this.chart3.Series.Add(series11);
-            this.chart3.Series.Add(series12);
-            this.chart3.Size = new System.Drawing.Size(759, 298);
+            series5.ChartArea = "ChartArea1";
+            series5.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Candlestick;
+            series5.Color = System.Drawing.Color.Red;
+            series5.Legend = "Legend1";
+            series5.Name = "Исходный сигнал";
+            series5.YValuesPerPoint = 4;
+            series6.ChartArea = "ChartArea1";
+            series6.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Candlestick;
+            series6.Color = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
+            series6.Legend = "Legend1";
+            series6.Name = "Сглаженный сигнал";
+            series6.YValuesPerPoint = 4;
+            this.chart3.Series.Add(series5);
+            this.chart3.Series.Add(series6);
+            this.chart3.Size = new System.Drawing.Size(1012, 367);
             this.chart3.TabIndex = 0;
             this.chart3.Text = "chart3";
-            title6.Name = "Title1";
-            title6.Text = "Амплитудный спектр";
-            this.chart3.Titles.Add(title6);
+            title3.Name = "Title1";
+            title3.Text = "Амплитудный спектр";
+            this.chart3.Titles.Add(title3);
             // 
             // tabPage3
             // 
             this.tabPage3.Controls.Add(this.button1);
             this.tabPage3.Controls.Add(this.pictureBox2);
             this.tabPage3.Controls.Add(this.pictureBox1);
-            this.tabPage3.Location = new System.Drawing.Point(4, 29);
-            this.tabPage3.Margin = new System.Windows.Forms.Padding(2);
+            this.tabPage3.Location = new System.Drawing.Point(4, 34);
+            this.tabPage3.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Size = new System.Drawing.Size(848, 317);
+            this.tabPage3.Size = new System.Drawing.Size(1133, 393);
             this.tabPage3.TabIndex = 4;
             this.tabPage3.Text = "Images";
             this.tabPage3.UseVisualStyleBackColor = true;
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(388, 278);
-            this.button1.Margin = new System.Windows.Forms.Padding(2);
+            this.button1.Location = new System.Drawing.Point(517, 342);
+            this.button1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(82, 32);
+            this.button1.Size = new System.Drawing.Size(109, 39);
             this.button1.TabIndex = 2;
             this.button1.Text = "Load Pic...";
             this.button1.UseVisualStyleBackColor = true;
@@ -266,19 +268,19 @@ namespace DSP.Lab3.Presentation
             // 
             // pictureBox2
             // 
-            this.pictureBox2.Location = new System.Drawing.Point(493, 9);
-            this.pictureBox2.Margin = new System.Windows.Forms.Padding(2);
+            this.pictureBox2.Location = new System.Drawing.Point(657, 11);
+            this.pictureBox2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(328, 301);
+            this.pictureBox2.Size = new System.Drawing.Size(437, 370);
             this.pictureBox2.TabIndex = 1;
             this.pictureBox2.TabStop = false;
             // 
             // pictureBox1
             // 
-            this.pictureBox1.Location = new System.Drawing.Point(17, 9);
-            this.pictureBox1.Margin = new System.Windows.Forms.Padding(2);
+            this.pictureBox1.Location = new System.Drawing.Point(23, 11);
+            this.pictureBox1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(343, 301);
+            this.pictureBox1.Size = new System.Drawing.Size(457, 370);
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
             // 
@@ -286,11 +288,11 @@ namespace DSP.Lab3.Presentation
             // 
             this.ImageSmoothingGroupBox.Controls.Add(this.ImageSmoothingComboBox);
             this.ImageSmoothingGroupBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.ImageSmoothingGroupBox.Location = new System.Drawing.Point(9, 84);
-            this.ImageSmoothingGroupBox.Margin = new System.Windows.Forms.Padding(2);
+            this.ImageSmoothingGroupBox.Location = new System.Drawing.Point(12, 103);
+            this.ImageSmoothingGroupBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.ImageSmoothingGroupBox.Name = "ImageSmoothingGroupBox";
-            this.ImageSmoothingGroupBox.Padding = new System.Windows.Forms.Padding(2);
-            this.ImageSmoothingGroupBox.Size = new System.Drawing.Size(287, 61);
+            this.ImageSmoothingGroupBox.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.ImageSmoothingGroupBox.Size = new System.Drawing.Size(383, 75);
             this.ImageSmoothingGroupBox.TabIndex = 6;
             this.ImageSmoothingGroupBox.TabStop = false;
             this.ImageSmoothingGroupBox.Text = "Вид сглаживания изображения:";
@@ -303,10 +305,10 @@ namespace DSP.Lab3.Presentation
             "Размытие Гаусса",
             "Медианный фильтр",
             "Фильтр Собеля"});
-            this.ImageSmoothingComboBox.Location = new System.Drawing.Point(4, 24);
-            this.ImageSmoothingComboBox.Margin = new System.Windows.Forms.Padding(2);
+            this.ImageSmoothingComboBox.Location = new System.Drawing.Point(5, 30);
+            this.ImageSmoothingComboBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.ImageSmoothingComboBox.Name = "ImageSmoothingComboBox";
-            this.ImageSmoothingComboBox.Size = new System.Drawing.Size(272, 28);
+            this.ImageSmoothingComboBox.Size = new System.Drawing.Size(361, 33);
             this.ImageSmoothingComboBox.TabIndex = 7;
             this.ImageSmoothingComboBox.SelectedIndexChanged += new System.EventHandler(this.comboBox2_SelectedIndexChanged);
             // 
@@ -318,10 +320,16 @@ namespace DSP.Lab3.Presentation
             this.WindowSizeComboBox.Items.AddRange(new object[] {
             "3",
             "5",
-            "7"});
-            this.WindowSizeComboBox.Location = new System.Drawing.Point(9, 25);
+            "7",
+            "9",
+            "11",
+            "13",
+            "15",
+            "17"});
+            this.WindowSizeComboBox.Location = new System.Drawing.Point(12, 31);
+            this.WindowSizeComboBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.WindowSizeComboBox.Name = "WindowSizeComboBox";
-            this.WindowSizeComboBox.Size = new System.Drawing.Size(272, 28);
+            this.WindowSizeComboBox.Size = new System.Drawing.Size(361, 33);
             this.WindowSizeComboBox.TabIndex = 7;
             this.WindowSizeComboBox.TextChanged += new System.EventHandler(this.WindowSizeComboBox_TextChanged);
             // 
@@ -329,23 +337,26 @@ namespace DSP.Lab3.Presentation
             // 
             this.WindowSizeGroupBox.Controls.Add(this.WindowSizeComboBox);
             this.WindowSizeGroupBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.WindowSizeGroupBox.Location = new System.Drawing.Point(9, 162);
+            this.WindowSizeGroupBox.Location = new System.Drawing.Point(12, 199);
+            this.WindowSizeGroupBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.WindowSizeGroupBox.Name = "WindowSizeGroupBox";
-            this.WindowSizeGroupBox.Size = new System.Drawing.Size(286, 88);
+            this.WindowSizeGroupBox.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.WindowSizeGroupBox.Size = new System.Drawing.Size(381, 108);
             this.WindowSizeGroupBox.TabIndex = 9;
             this.WindowSizeGroupBox.TabStop = false;
             this.WindowSizeGroupBox.Text = "Размер окна:";
             // 
             // MainForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
-            this.ClientSize = new System.Drawing.Size(1162, 378);
+            this.ClientSize = new System.Drawing.Size(1549, 465);
             this.Controls.Add(this.WindowSizeGroupBox);
             this.Controls.Add(this.ImageSmoothingGroupBox);
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.SmoothingGroupBox);
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "MainForm";
             this.Text = "Алгоритмы сглаживания";
             this.Load += new System.EventHandler(this.MainForm_Load);
